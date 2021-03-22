@@ -1,460 +1,241 @@
-[
-  {
-    "schemaType": "Collection",
-    "name": "Suppliers",
-    "type": "ObjectId",
-    "required": true,
-    "unique": true,
-    "defaultValue": "",
-    "description": "",
-    "index": 0,
-    "customProps": [
+
+const MongoClient = require('mongodb').MongoClient;
+const  url = 'mongodb://localhost/optica-database';
+ 
+MongoClient.connect(url, function(err, db) {
+
+        const dbo = db.db("optica-database");
+        dbo.createCollection("customers", function(err, res) {
+            if (err) throw err;
+            console.log("Collection created!" + res);
+        });
+
+        dbo.collection('customers').insertMany(
+          [{
+              
+              "lastName": "Garcia",
+              "firstName": "Maria",
+              "address": {
+                "street": "Calle del camino 20",
+                "zipcode": "08025",
+                "city": "Valencia"
+              },
+              "contactDetails": {
+                "email": "eiueiur@gmai.com",
+                "phone": "936528457"
+              },
+              "registeredAT": "2019-09-24",
+              "recommendedBy": "Antonio Perez"
+            },{
+              
+              "lastName": "Perez",
+              "firstName": "Alfonso",
+              "address": {
+                "street": "Calle del camino 20",
+                "zipcode": "08025",
+                "city": "Valencia"
+              },
+              "contactDetails": {
+                "email": "8eiur@hotmail.com",
+                "phone": "909528457"
+              },
+              "registeredAT": "2019-09-24",
+              "recommendedBy": "Sonia Rodriguez"
+            },{
+              
+              "lastName": "martinez",
+              "firstName": "Javier",
+              "address": {
+                "street": "Plaza del pueblo",
+                "zipcode": "08532",
+                "city": "Cadiz"
+              },
+              "contactDetails": {
+                "email": "j.ca@gmai.com",
+                "phone": "9754097"
+              },
+              "registeredAT": "2019-09-24",
+              "recommendedBy": "Antonio Perez"
+            }]
+        );     
+
+        dbo.createCollection("suppliers", function(err, res) {
+          if (err) throw err;
+          console.log("Collection created!" + res);
+        }); 
+  
+              dbo.collection('suppliers').insertMany(
+                [{
+                  
+                  "name": "MAlly Sourcing LLC",
+                  "nif": 938787,
+                  "address": {
+                    "street": "Subenstrujenbajenstrasse",
+                    "number": 750,
+                    "floor": 1,
+                    "door": null,
+                    "zipcode": "22182",
+                    "city": "Vienna",
+                    "country": "Austria"
+                  },
+                  "phone": 43589548454,
+                  "fax": 43589548455,
+                  "brands": [
+                    "Ray-Ban",
+                    "Dakley",
+                    "Polaroid",
+                    "Ferrari"
+                  ],
+                  "orders": [
+                    {
+                      "orderDate": {
+                        "date": "2019-07-10T22:00:00Z"
+                      },
+                      "orderPrice": 365,
+                      "itemsOrdered": [
+                        "Impala",
+                        "calas",
+                        "logi"
+                      ],
+                      "itemPrice": [
+                        50,
+                        40,
+                        35
+                      ],
+                      "itemQuantity": [
+                        2,
+                        4,
+                        3
+                      ]
+                    }
+                  ]
+                },{
+                  
+                  "name": "National Association Glass",
+                  "nif": 58998,
+                  "address": {
+                    "street": "Austin Marketing Str.",
+                    "number": 14,
+                    "floor": 0,
+                    "door": 3,
+                    "zipcode": "55908",
+                    "city": "London",
+                    "country": "United-Kingdom"
+                  },
+                  "phone": 1207288200,
+                  "fax": 1207288203,
+                  "brands": [
+                    "Dior",
+                    "Ferrari",
+                    "Boss",
+                    "Tous"
+                  ]
+                }]
+
+              ); // insertmany
+              
+              dbo.createCollection("glasses", function(err, res) {
+                if (err) throw err;
+                console.log("Collection created!" + res);
+            });
+    
+                dbo.collection('glasses').insertMany(
+                  [{
+                    
+                    "name": "Impala",
+                    "price": 90,
+                    "details": {
+                      "diopters": 2,
+                      "color glass": "blue",
+                      "glass frame": "hard",
+                      "color frame": "blue"
+                    },
+                    "brand": {
+                      "oid": "60507e642e7c2f29e619aca1"
+                    }
+                  },{
+                    
+                    "name": "calas",
+                    "price": 120,
+                    "details": {
+                      "diopters": 0.1,
+                      "color glass": "red",
+                      "glass frame": "semi-hard",
+                      "color frame": "blue"
+                    },
+                    "brand": {
+                      "oid": "60507e642e7c2f29e619aca1"
+                    }
+                  },{
+                    
+                    "name": "logi",
+                    "price": 75,
+                    "details": {
+                      "diopters": 0.7,
+                      "color glass": "yellow",
+                      "glass frame": "soft",
+                      "color frame": "white"
+                    },
+                    "brand": {
+                      "oid": "60507e642e7c2f29e619aca2"
+                    }
+                  }]  
+
+                
+  
+                ); // insertmany
+
+                dbo.createCollection("sales", function(err, res) {
+                  if (err) throw err;
+                  console.log("Collection created!" + res);
+                });
       
-    ],
-    "fields": [
-      {
-        "schemaType": "Field",
-        "name": "_id",
-        "type": "ObjectId",
-        "required": true,
-        "unique": true,
-        "defaultValue": "",
-        "description": "Collection for all data related to the Suppliers",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "name",
-        "type": "String",
-        "required": true,
-        "unique": true,
-        "defaultValue": "",
-        "description": "Customers name",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "nif",
-        "type": "String",
-        "required": true,
-        "unique": true,
-        "defaultValue": "",
-        "description": "Nif ",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "address",
-        "type": "Object",
-        "required": 1,
-        "unique": 0,
-        "defaultValue": "{Street: null, number: null, floor: null, doorNr: null, zip: null, city: null, country: null}",
-        "description": "{Street: null, number: null, floor: null, doorNr: null, zip: null, city: null, country: null}",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "phone",
-        "type": "Integer",
-        "required": false,
-        "unique": true,
-        "defaultValue": "",
-        "description": "",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "fax",
-        "type": "Integer",
-        "required": false,
-        "unique": false,
-        "defaultValue": "",
-        "description": "",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "brands",
-        "type": "Array",
-        "required": true,
-        "unique": false,
-        "defaultValue": "[ ]",
-        "description": "Brands names",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      }
-    ]
-  },
-  {
-    "schemaType": "Collection",
-    "name": "Orders",
-    "defaultValue": "Orders",
-    "description": "Collection with all orders done by suppliers, with order details, like quantity, prices, etc.",
-    "fields": [
-      {
-        "schemaType": "Field",
-        "name": "_id",
-        "type": "ObjectId",
-        "required": true,
-        "unique": true,
-        "defaultValue": "",
-        "description": "",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "orderDate",
-        "type": "Date",
-        "required": true,
-        "unique": false,
-        "defaultValue": "",
-        "description": "Date when order was submitted",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "orderItems",
-        "type": "Object",
-        "required": true,
-        "unique": false,
-        "defaultValue": "",
-        "description": "{glass order, quantity, price}",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      }
-    ]
-  },
-  {
-    "schemaType": "Collection",
-    "name": "Glasses",
-    "defaultValue": "",
-    "description": "All Glasses for sales. Each glass belongs only to a brand in collection Supplier",
-    "fields": [
-      {
-        "schemaType": "Field",
-        "name": "_id",
-        "type": "ObjectId",
-        "required": true,
-        "unique": true,
-        "defaultValue": "",
-        "description": "",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "name",
-        "type": "String",
-        "required": true,
-        "unique": false,
-        "defaultValue": "",
-        "description": "Name of the glass",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "price",
-        "type": "Double",
-        "required": false,
-        "unique": false,
-        "defaultValue": "",
-        "description": "",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "details",
-        "type": "Object",
-        "required": true,
-        "unique": false,
-        "defaultValue": "",
-        "description": "{diopters, color_glass, glass_frame,  color_frame}\n",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "brand",
-        "type": "ObjectId",
-        "required": true,
-        "unique": true,
-        "defaultValue": "",
-        "description": "Reference to the brand in Suppliers",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      }
-    ]
-  },
-  {
-    "schemaType": "Collection",
-    "name": "Sales",
-    "defaultValue": "",
-    "description": "Customers sales register",
-    "fields": [
-      {
-        "schemaType": "Field",
-        "name": "_id",
-        "type": "ObjectId",
-        "required": true,
-        "unique": true,
-        "defaultValue": "",
-        "description": "",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "saleDate",
-        "type": "Date",
-        "required": true,
-        "unique": false,
-        "defaultValue": "",
-        "description": "When sale was done",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "customer",
-        "type": "ObjectId",
-        "required": false,
-        "unique": false,
-        "defaultValue": "",
-        "description": "Reference to colletion Customers",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "totalPrice",
-        "type": "Double",
-        "required": false,
-        "unique": false,
-        "defaultValue": "",
-        "description": "",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "salesItems",
-        "type": "Object",
-        "required": false,
-        "unique": false,
-        "defaultValue": "",
-        "description": "{product, price, quantity}",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "salesDoneBy",
-        "type": "ObjectId",
-        "required": true,
-        "unique": false,
-        "defaultValue": "",
-        "description": "Which employees has done the sales",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      }
-    ]
-  },
-  {
-    "schemaType": "Collection",
-    "name": "Customers",
-    "defaultValue": "",
-    "description": "Collection with all customers details",
-    "fields": [
-      {
-        "schemaType": "Field",
-        "name": "_id",
-        "type": "ObjectId",
-        "required": true,
-        "unique": true,
-        "defaultValue": "",
-        "description": "",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "lastName",
-        "type": "String",
-        "required": true,
-        "unique": false,
-        "defaultValue": "",
-        "description": "",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "firstName",
-        "type": "String",
-        "required": true,
-        "unique": false,
-        "defaultValue": "",
-        "description": "",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "customerAddress",
-        "type": "Object",
-        "required": true,
-        "unique": false,
-        "defaultValue": "",
-        "description": "{Street: null, number: null, floor: null, doorNr: null, zip: null, city: null, country: null}",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "contactDetails",
-        "type": "Object",
-        "required": true,
-        "unique": false,
-        "defaultValue": "",
-        "description": "{Email, phone, fax}",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "registeredAt",
-        "type": "Date",
-        "required": true,
-        "unique": false,
-        "defaultValue": "",
-        "description": "Customer's registration date",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "recommendedBy",
-        "type": "ObjectId",
-        "required": false,
-        "unique": false,
-        "defaultValue": "",
-        "description": "In case of recommendation from another customer",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      }
-    ]
-  },
-  {
-    "schemaType": "Collection",
-    "name": "Employees",
-    "defaultValue": "",
-    "description": "",
-    "fields": [
-      {
-        "schemaType": "Field",
-        "name": "_id",
-        "type": "ObjectId",
-        "required": true,
-        "unique": true,
-        "defaultValue": "",
-        "description": "",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "lastName",
-        "type": "String",
-        "required": true,
-        "unique": false,
-        "defaultValue": "",
-        "description": "",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      },
-      {
-        "schemaType": "Field",
-        "name": "firstName",
-        "type": "String",
-        "required": false,
-        "unique": false,
-        "defaultValue": "",
-        "description": "",
-        "index": 0,
-        "customProps": [
-          
-        ]
-      }
-    ]
-  }
-]
+                  dbo.collection('sales').insertMany(
+                    [{
+                      
+                      "items": [
+                        {
+                          "glass": {
+                            "oid": "60508e712e7c2f29e619aca6"
+                          },
+                          "quantity": 1
+                        },
+                        {
+                          "glass": {
+                            "oid": "60508e712e7c2f29e619aca8"
+                          },
+                          "quantity": 1
+                        }
+                      ],
+                      "finalPrice": 165,
+                      "salesDate": "2020-11-01",
+                      "salesDoneBy": "Antonio Perez",
+                      "customer": {
+                        "oid": "605099bf2e7c2f29e619aca9"
+                      }
+                    },{
+                      
+                      "items": [
+                        {
+                          "glass": {
+                            "oid": "60508e712e7c2f29e619aca7"
+                          },
+                          "quantity": 1
+                        }
+                      ],
+                      "finalPrice": 120,
+                      "salesDate": "2020-05-12",
+                      "salesDoneBy": "Antonio Perez",
+                      "customer": {
+                        "oid": "605099bf2e7c2f29e619acab"
+                      }
+                    }]
+  
+                  
+    
+                  ); // insertmany
+              
+            
+
+        db.close();
+});
