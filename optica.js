@@ -17,18 +17,19 @@ dbo.createCollection("suppliers", function(err, res) {
   console.log("Collection created!" + res);
 }); 
 
+        
 dbo.createCollection("glassCatalog", function(err, res) {
   if (err) throw err;
   console.log("Collection created!" + res);
 }); 
 
 
+// Para cargar no olvidar de quitar los '_id'
+
 dbo.customers.insertMany(
   
   [{
-    "_id": {
-      "$oid": "60755f93432eed44761676bb"
-    },
+    
     "lastName": "Garcia",
     "firstName": "Maria",
     "address": {
@@ -55,9 +56,6 @@ dbo.customers.insertMany(
       }
     ]
   },{
-    "_id": {
-      "$oid": "60755f93432eed44761676bc"
-    },
     "lastName": "Rodriguez",
     "firstName": "Miguel",
     "address": {
@@ -88,9 +86,6 @@ dbo.customers.insertMany(
 
 dbo.suppliers.insertMany(
   [{
-    "_id": {
-      "$oid": "60755f93432eed44761676bd"
-    },
     "name": "MAlly Sourcing LLC",
     "nif": 938787,
     "address": {
@@ -133,9 +128,6 @@ dbo.suppliers.insertMany(
       "Auckley"
     ]
   },{
-    "_id": {
-      "$oid": "60755f93432eed44761676be"
-    },
     "name": "Sauge glasses and Sons",
     "nif": 123455,
     "address": {
@@ -179,9 +171,6 @@ dbo.suppliers.insertMany(
         
 dbo.glassCatalog.insertMany(
   [{
-    "_id": {
-      "$oid": "60780b725ccea83f5c49115d"
-    },
     "glassName": "Impala",
     "glassColor": "white",
     "glassFrame": "hard",
@@ -193,9 +182,6 @@ dbo.glassCatalog.insertMany(
       "$oid": "60755f93432eed44761676bd"
     }
   },{
-    "_id": {
-      "$oid": "60780b725ccea83f5c49115e"
-    },
     "glassName": "coli",
     "glassColor": "white",
     "glassFrame": "pasta",
@@ -207,9 +193,6 @@ dbo.glassCatalog.insertMany(
       "$oid": "60755f93432eed44761676be"
     }
   },{
-    "_id": {
-      "$oid": "60780b725ccea83f5c49115f"
-    },
     "glassName": "DSH",
     "glassColor": "yellow",
     "glassFrame": "metal",
