@@ -17,10 +17,18 @@ dbo.createCollection("suppliers", function(err, res) {
   console.log("Collection created!" + res);
 }); 
 
+dbo.createCollection("glassCatalog", function(err, res) {
+  if (err) throw err;
+  console.log("Collection created!" + res);
+}); 
+
 
 dbo.customers.insertMany(
   
   [{
+    "_id": {
+      "$oid": "60755f93432eed44761676bb"
+    },
     "lastName": "Garcia",
     "firstName": "Maria",
     "address": {
@@ -34,26 +42,22 @@ dbo.customers.insertMany(
     },
     "registeredAT": "2019-09-24",
     "recommendedBy": "Antonio Perez",
-    "invoices": [
+    "Invoices": [
       {
-        "id": {
-          "$oid": "60754e4cef864d9e44f7a550"
-        },
+        "invoiceNr": 1,
+        "invoiceDate": "2021-01-01",
         "items": [
-          {
-            "glassId": 1,
-            "quantity": 2
-          },
-          {
-            "glassID": 2,
-            "quantity": "1"
-          }
+          "Impala",
+          "coli"
         ],
-        "finalPrice": 200
+        "quantity": 2,
+        "totalPrice": 200
       }
     ]
-  },
-  {
+  },{
+    "_id": {
+      "$oid": "60755f93432eed44761676bc"
+    },
     "lastName": "Rodriguez",
     "firstName": "Miguel",
     "address": {
@@ -69,16 +73,13 @@ dbo.customers.insertMany(
     "recommendedBy": "Antonio Perez",
     "invoices": [
       {
-        "id": {
-          "$oid": "60754e4cef864d9e44f7a550"
-        },
+        "invoiceNr": "1",
+        "invoiceDate": "2020-12-11",
         "items": [
-          {
-            "glassId": 13,
-            "quantity": 1
-          }
+          "DSH"
         ],
-        "finalPrice": 80
+        "quantity": "1",
+        "totalPrice": 90
       }
     ]
   }]
@@ -87,6 +88,9 @@ dbo.customers.insertMany(
 
 dbo.suppliers.insertMany(
   [{
+    "_id": {
+      "$oid": "60755f93432eed44761676bd"
+    },
     "name": "MAlly Sourcing LLC",
     "nif": 938787,
     "address": {
@@ -123,40 +127,15 @@ dbo.suppliers.insertMany(
         ]
       }
     ],
-    "glasses": [
-      {
-        "id": "1",
-        "glassName": "Impala",
-        "price": 90,
-        "diopters": "2",
-        "colorGlass": "blue",
-        "frameGlass": "hard",
-        "colorFrame": "blue",
-        "brand": "Ray-Ban"
-      },
-      {
-        "id": "2",
-        "glassName": "calas",
-        "price": 40,
-        "diopters": "1",
-        "colorGlass": "black",
-        "frameGlass": "hard",
-        "colorFrame": "blue",
-        "brand": "Ray-Ban"
-      },
-      {
-        "id": "3",
-        "glassName": "Logi",
-        "price": 90,
-        "diopters": "2.7",
-        "colorGlass": "red",
-        "frameGlass": "semihard",
-        "colorFrame": "red",
-        "brand": "Dakley"
-      }
+    "brands": [
+      "RayBan",
+      "Ferrari",
+      "Auckley"
     ]
-  },
-  {
+  },{
+    "_id": {
+      "$oid": "60755f93432eed44761676be"
+    },
     "name": "Sauge glasses and Sons",
     "nif": 123455,
     "address": {
@@ -190,29 +169,56 @@ dbo.suppliers.insertMany(
         ]
       }
     ],
-    "glasses": [
-      {
-        "id": "13",
-        "glassName": "Azulonas",
-        "pricePVP": 80,
-        "diopters": 2,
-        "colorGlass": "red",
-        "frameGlass": "soft",
-        "colorFrame": "red",
-        "brand": "MultiOptica"      
-      },
-      {
-       "id": "14",
-        "glassName": "Rojitas",
-        "pricePVP": "56",
-        "diopters": 1.4,
-        "colorGlass": "brown",
-        "frameGlass": "hard",
-        "colorFrame": "black",
-        "brand": "MultiOptica"
-      }
+    "brands": [
+      "Multioptica",
+      "universal"
     ]
   }]
-
+ 
 ); // insertmany
         
+dbo.glassCatalog.insertMany(
+  [{
+    "_id": {
+      "$oid": "60780b725ccea83f5c49115d"
+    },
+    "glassName": "Impala",
+    "glassColor": "white",
+    "glassFrame": "hard",
+    "frameColor": "white",
+    "diopters": 2,
+    "pvp": 90,
+    "brand": "Rayban",
+    "supplierRefence": {
+      "$oid": "60755f93432eed44761676bd"
+    }
+  },{
+    "_id": {
+      "$oid": "60780b725ccea83f5c49115e"
+    },
+    "glassName": "coli",
+    "glassColor": "white",
+    "glassFrame": "pasta",
+    "frameColor": "brown",
+    "diopters": 2.5,
+    "pvp": 60,
+    "brand": "MultiOptica",
+    "supplierRefence": {
+      "$oid": "60755f93432eed44761676be"
+    }
+  },{
+    "_id": {
+      "$oid": "60780b725ccea83f5c49115f"
+    },
+    "glassName": "DSH",
+    "glassColor": "yellow",
+    "glassFrame": "metal",
+    "frameColor": "black",
+    "diopters": 3,
+    "pvp": 110,
+    "brand": "Rayban",
+    "supplierRefence": {
+      "$oid": "60755f93432eed44761676bd"
+    }
+  }]
+  ); // insertmany
